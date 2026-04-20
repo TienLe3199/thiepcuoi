@@ -1,0 +1,409 @@
+/* =========================================================
+   RESET & BASE
+   ========================================================= */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html,
+body {
+    min-height: 100%;
+}
+
+body {
+    font-family: "Montserrat", "Helvetica Neue", Arial, sans-serif;
+    color: #555;
+    background: #0d0d0d url("assets/bg.png") center center / cover no-repeat fixed;
+    min-height: 100vh;
+    padding: 48px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* =========================================================
+   LAYOUT - 3 CARD
+   ========================================================= */
+.invitation {
+    width: 100%;
+    max-width: 1180px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+}
+
+.card {
+    position: relative;
+    background: #fbf7ee;
+    padding: 56px 36px;
+    min-height: 720px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: #555;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+    border: 1px solid rgba(184, 153, 104, 0.25);
+    transition: transform 0.5s ease, box-shadow 0.5s ease;
+    opacity: 0;
+    transform: translateY(24px);
+    animation: fadeUp 1.2s ease forwards;
+}
+
+.card:nth-child(1) {
+    animation-delay: 0.1s;
+}
+
+.card:nth-child(2) {
+    animation-delay: 0.35s;
+}
+
+.card:nth-child(3) {
+    animation-delay: 0.6s;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.45);
+}
+
+.card::before {
+    content: "";
+    position: absolute;
+    inset: 14px;
+    border: 1px solid rgba(184, 153, 104, 0.4);
+    pointer-events: none;
+}
+
+/* =========================================================
+   TYPOGRAPHY
+   ========================================================= */
+.eyebrow {
+    font-family: "Montserrat", sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.45em;
+    text-transform: uppercase;
+    color: #8a6f3d;
+}
+
+.title {
+    font-family: "Cormorant Garamond", "Times New Roman", serif;
+    font-weight: 400;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: #444;
+}
+
+.script {
+    font-family: "Great Vibes", cursive;
+    color: #3d3d3d;
+    font-weight: 400;
+    line-height: 1.1;
+}
+
+.muted {
+    color: #888;
+}
+
+/* =========================================================
+   DIVIDER
+   ========================================================= */
+.divider {
+    width: 70%;
+    height: 1px;
+    background: rgba(184, 153, 104, 0.5);
+    margin: 20px auto;
+}
+
+.divider-ornate {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin: 22px auto;
+    width: 80%;
+}
+
+.divider-ornate::before,
+.divider-ornate::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: rgba(184, 153, 104, 0.5);
+}
+
+.divider-ornate span {
+    color: #b89968;
+    font-size: 10px;
+    letter-spacing: 0.4em;
+}
+
+/* =========================================================
+   CARD 1 — SAVE THE DATE
+   ========================================================= */
+.card--save .save-title {
+    font-size: 26px;
+    letter-spacing: 0.5em;
+    margin-left: 0.5em;
+}
+
+.card--save .save-date {
+    margin-top: 18px;
+    font-family: "Cormorant Garamond", serif;
+    font-size: 14px;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: #8a6f3d;
+}
+
+.card--save .couple {
+    margin: 34px 0 10px;
+}
+
+.card--save .couple .name {
+    font-size: 78px;
+    display: block;
+}
+
+.card--save .couple .amp {
+    font-family: "Cormorant Garamond", serif;
+    font-style: italic;
+    font-size: 36px;
+    color: #b89968;
+    display: block;
+    margin: 4px 0;
+}
+
+.card--save .invite-note {
+    font-family: "Cormorant Garamond", serif;
+    font-style: italic;
+    font-size: 20px;
+    color: #666;
+    margin-top: 28px;
+}
+
+/* =========================================================
+   CARD 2 — THÔNG TIN CHÍNH
+   ========================================================= */
+.families {
+    display: grid;
+    grid-template-columns: 1fr 1px 1fr;
+    gap: 18px;
+    width: 100%;
+    align-items: start;
+    margin-bottom: 10px;
+}
+
+.families .family {
+    font-family: "Cormorant Garamond", serif;
+    color: #555;
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+.families .family .role {
+    font-family: "Montserrat", sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: #8a6f3d;
+    margin-bottom: 8px;
+}
+
+.families .family .parent-name {
+    font-size: 16px;
+    color: #444;
+}
+
+.families .vline {
+    width: 1px;
+    background: rgba(184, 153, 104, 0.45);
+    justify-self: center;
+    align-self: stretch;
+}
+
+.card--main .main-title {
+    font-family: "Cormorant Garamond", serif;
+    font-weight: 400;
+    font-size: 18px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: #444;
+}
+
+.card--main .couple-main .name {
+    font-size: 62px;
+    display: block;
+    line-height: 1;
+}
+
+.card--main .couple-main .amp {
+    font-family: "Cormorant Garamond", serif;
+    font-style: italic;
+    font-size: 28px;
+    color: #b89968;
+    display: block;
+    margin: 2px 0;
+}
+
+.date-block {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    gap: 18px;
+    margin: 6px auto 0;
+}
+
+.date-block .side {
+    font-family: "Cormorant Garamond", serif;
+    font-size: 15px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: #666;
+}
+
+.date-block .side small {
+    display: block;
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    color: #999;
+    margin-top: 4px;
+}
+
+.date-block .day-big {
+    font-family: "Cormorant Garamond", serif;
+    font-weight: 500;
+    font-size: 68px;
+    line-height: 1;
+    color: #3d3d3d;
+    padding: 0 14px;
+    border-left: 1px solid rgba(184, 153, 104, 0.5);
+    border-right: 1px solid rgba(184, 153, 104, 0.5);
+}
+
+.weekday {
+    font-family: "Montserrat", sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: #8a6f3d;
+}
+
+.venue {
+    font-family: "Cormorant Garamond", serif;
+    font-size: 15px;
+    line-height: 1.6;
+    color: #555;
+}
+
+.venue strong {
+    font-weight: 500;
+    color: #3d3d3d;
+    letter-spacing: 0.08em;
+}
+
+/* =========================================================
+   CARD 3 — TIỆC CƯỚI
+   ========================================================= */
+.card--party .welcome {
+    font-family: "Cormorant Garamond", serif;
+    font-style: italic;
+    font-size: 22px;
+    color: #666;
+}
+
+.card--party .venue-name {
+    font-family: "Cormorant Garamond", serif;
+    font-size: 30px;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #3d3d3d;
+    line-height: 1.2;
+}
+
+.card--party .venue-address {
+    font-family: "Cormorant Garamond", serif;
+    font-size: 14px;
+    color: #777;
+    line-height: 1.6;
+    max-width: 80%;
+    margin: 0 auto;
+}
+
+.card--party .closing {
+    font-family: "Cormorant Garamond", serif;
+    font-style: italic;
+    font-size: 16px;
+    color: #777;
+    line-height: 1.7;
+    max-width: 85%;
+    margin: 0 auto;
+}
+
+/* =========================================================
+   SPACERS
+   ========================================================= */
+.spacer-sm {
+    height: 14px;
+}
+
+.spacer-md {
+    height: 24px;
+}
+
+.spacer-lg {
+    height: 36px;
+}
+
+/* =========================================================
+   ANIMATION
+   ========================================================= */
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(24px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+@media (max-width: 960px) {
+    body {
+        padding: 28px 16px;
+        background-attachment: scroll;
+    }
+
+    .invitation {
+        grid-template-columns: 1fr;
+        max-width: 460px;
+        gap: 24px;
+    }
+
+    .card {
+        min-height: auto;
+        padding: 48px 28px;
+    }
+
+    .card--save .couple .name {
+        font-size: 64px;
+    }
+
+    .card--main .couple-main .name {
+        font-size: 54px;
+    }
+
+    .date-block .day-big {
+        font-size: 58px;
+    }
+}
