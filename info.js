@@ -68,9 +68,9 @@ window.info = {
         },
         {
             id: "wedding",
-            name: "Thành Hôn",
+            name: "Tân Hôn",
             nameBySide: {
-                groom: "Thành Hôn",
+                groom: "Tân Hôn",
                 bride: "Vu Quy"
             },
             date: "Thứ Hai - 16/11/2026",
@@ -90,9 +90,9 @@ window.info = {
             },
 
             card1Title: "Save the Date",
-            card2Title: "Lễ Thành Hôn của chúng tôi",
+            card2Title: "Lễ Tân Hôn của chúng tôi",
             card2TitleBySide: {
-                groom: "Lễ Thành Hôn của chúng tôi",
+                groom: "Lễ Tân Hôn của chúng tôi",
                 bride: "Lễ Vu Quy của chúng tôi"
             },
             card3EyebrowTop: "Wedding Reception"
