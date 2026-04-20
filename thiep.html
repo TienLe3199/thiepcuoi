@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Thiệp cưới</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Great+Vibes&family=Montserrat:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+    <!-- Dữ liệu dùng chung -->
+    <script src="info.js"></script>
+
+    <!-- Nút quay lại trang giới thiệu -->
+    <a href="index.html" class="back-link" aria-label="Quay lại">&larr; Trang chủ</a>
+
+    <main class="invitation">
+
+        <!-- =============================================
+             CARD 1 — SAVE THE DATE
+             ============================================= -->
+        <section class="card card--save">
+            <p class="eyebrow" data-bind="card1.eyebrowTop"></p>
+
+            <div class="spacer-md"></div>
+            <h1 class="title save-title" data-bind="card1.title"></h1>
+
+            <p class="save-date" data-bind="card1.dateDisplay"></p>
+
+            <div class="divider-ornate"><span>&#10086;</span></div>
+
+            <div class="couple">
+                <span class="script name" data-bind="groom.name"></span>
+                <span class="amp" data-bind="card1.amp"></span>
+                <span class="script name" data-bind="bride.name"></span>
+            </div>
+
+            <div class="divider"></div>
+
+            <p class="invite-note" data-bind="card1.inviteNote"></p>
+
+            <div class="spacer-md"></div>
+            <p class="eyebrow" data-bind="card1.eyebrowBottom"></p>
+        </section>
+
+
+        <!-- =============================================
+             CARD 2 — LỄ (Đám Hỏi / Vu Quy / …)
+             ============================================= -->
+        <section class="card card--main">
+
+            <!-- Gia đình hai bên -->
+            <div class="families">
+                <div class="family">
+                    <p class="role" data-bind="card2.nhaTraiLabel"></p>
+                    <p>
+                        <span data-bind="card2.fatherPrefix"></span>&nbsp;
+                        <span class="parent-name" data-bind="groom.parents.father"></span>
+                    </p>
+                    <p>
+                        <span data-bind="card2.motherPrefix"></span>&nbsp;
+                        <span class="parent-name" data-bind="groom.parents.mother"></span>
+                    </p>
+                </div>
+                <div class="vline"></div>
+                <div class="family">
+                    <p class="role" data-bind="card2.nhaGaiLabel"></p>
+                    <p>
+                        <span data-bind="card2.fatherPrefix"></span>&nbsp;
+                        <span class="parent-name" data-bind="bride.parents.father"></span>
+                    </p>
+                    <p>
+                        <span data-bind="card2.motherPrefix"></span>&nbsp;
+                        <span class="parent-name" data-bind="bride.parents.mother"></span>
+                    </p>
+                </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <p class="main-title" data-bind="card2.title"></p>
+
+            <div class="spacer-md"></div>
+
+            <div class="couple-main">
+                <span class="script name" data-bind="groom.name"></span>
+                <span class="amp" data-bind="card2.amp"></span>
+                <span class="script name" data-bind="bride.name"></span>
+            </div>
+
+            <div class="divider-ornate"><span>&#10086;</span></div>
+
+            <p class="weekday" data-bind="card2.weekday"></p>
+            <div class="date-block">
+                <div class="side">
+                    <span data-bind="card2.hour"></span>
+                    <small data-bind="card2.minuteLabel"></small>
+                </div>
+                <div class="day-big" data-bind="card2.day"></div>
+                <div class="side">
+                    <span data-bind="card2.month"></span>
+                    <small data-bind="card2.year"></small>
+                </div>
+            </div>
+
+            <div class="spacer-md"></div>
+
+            <p class="venue">
+                <strong data-bind="card2.venueName"></strong><br />
+                <span data-bind="card2.venueAddress"></span><br />
+                <span class="muted" data-bind="card2.lunarNote"></span>
+            </p>
+        </section>
+
+
+        <!-- =============================================
+             CARD 3 — TIỆC
+             ============================================= -->
+        <section class="card card--party">
+            <p class="eyebrow" data-bind="card3.eyebrowTop"></p>
+
+            <div class="spacer-md"></div>
+            <p class="welcome" data-bind="card3.welcome"></p>
+
+            <div class="divider"></div>
+
+            <h2 class="venue-name" data-bind="card3.venueName"></h2>
+            <div class="spacer-sm"></div>
+            <p class="venue-address" data-bind-html="card3.addressHtml"></p>
+
+            <div class="divider-ornate"><span>&#10086;</span></div>
+
+            <p class="weekday" data-bind="card3.weekday"></p>
+            <div class="date-block">
+                <div class="side">
+                    <span data-bind="card3.hour"></span>
+                    <small data-bind="card3.minuteLabel"></small>
+                </div>
+                <div class="day-big" data-bind="card3.day"></div>
+                <div class="side">
+                    <span data-bind="card3.month"></span>
+                    <small data-bind="card3.year"></small>
+                </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <p class="closing" data-bind-html="card3.closingHtml"></p>
+
+            <div class="spacer-md"></div>
+            <p class="eyebrow" data-bind="card3.eyebrowBottom"></p>
+        </section>
+
+    </main>
+
+
+    <!-- =============================================================
+         SCRIPT: BIND dữ liệu sự kiện được chọn vào 3 thẻ
+         ============================================================= -->
+    <script>
+        (function () {
+            /* ---- Helpers ---- */
+            const parseDate = (s) => {
+                const m = /^\s*(.+?)\s*-\s*(\d{1,2})\/(\d{1,2})\/(\d{4})\s*$/.exec(s || "");
+                return m
+                    ? { weekday: m[1].trim(), day: m[2], month: m[3], year: m[4] }
+                    : { weekday: "", day: "", month: "", year: "" };
+            };
+
+            const parseTime = (s) => {
+                const [h = "", mm = ""] = (s || "").split(":");
+                return { hour: h, minute: mm };
+            };
+
+            const linesToHtml = (lines) =>
+                (Array.isArray(lines) ? lines : [lines])
+                    .filter((l) => l != null && l !== "")
+                    .map((l) => String(l))
+                    .join("<br/>");
+
+            /* ---- Chọn event theo URL: ?event=<id> ---- */
+            const params = new URLSearchParams(location.search);
+            const eventId = params.get("event")
+                || info.defaultEventId
+                || (info.events[0] && info.events[0].id);
+
+            const ev = info.events.find((e) => e.id === eventId) || info.events[0] || {};
+            const party = ev.party || {};
+
+            const d = parseDate(ev.date);              // ngày của lễ (Card 1 + Card 2)
+            const t2 = parseTime(ev.time);             // giờ lễ
+            const t3 = parseTime(party.time || ev.time); // giờ tiệc
+
+            const hSfx2 = info.card2.hourSuffix || "Giờ";
+            const hSfx3 = info.card3.hourSuffix || "Giờ";
+
+            const lunarRaw = (ev.date_al || "").replace(/^ÂL\s*:\s*/i, "").trim();
+            const lunarNote = lunarRaw ? `(Nhằm ngày ${lunarRaw} Âm lịch)` : "";
+
+            /* ---- ViewModel ---- */
+            const vm = {
+                groom: info.groom,
+                bride: info.bride,
+
+                card1: {
+                    ...info.card1,
+                    title: ev.card1Title || info.card1.title || "Save the Date",
+                    dateDisplay: (d.day && d.month && d.year)
+                        ? `${d.day} · ${d.month} · ${d.year}`
+                        : ""
+                },
+
+                card2: {
+                    ...info.card2,
+                    title: ev.card2Title || info.card2.title || ev.name || "",
+                    weekday: d.weekday,
+                    day: d.day,
+                    month: d.month,
+                    year: d.year,
+                    hour: t2.hour,
+                    minuteLabel: hSfx2 + " " + (t2.minute || "00"),
+                    venueName: (ev.venue || "").toUpperCase(),
+                    venueAddress: ev.address || "",
+                    lunarNote
+                },
+
+                card3: {
+                    ...info.card3,
+                    eyebrowTop: ev.card3EyebrowTop || info.card3.eyebrowTop || "",
+                    venueName: party.venueName || info.card3.venueName || "",
+                    weekday: d.weekday,
+                    day: d.day,
+                    month: d.month,
+                    year: d.year,
+                    hour: t3.hour,
+                    minuteLabel: hSfx3 + " " + (t3.minute || "00"),
+                    addressHtml: linesToHtml(party.addressLines || info.card3.addressLines || []),
+                    closingHtml: linesToHtml(info.card3.closingLines)
+                }
+            };
+
+            /* ---- Bind vào DOM ---- */
+            const byPath = (obj, path) =>
+                path.split(".").reduce((o, k) => (o == null ? undefined : o[k]), obj);
+
+            document.title = ev.name
+                ? `${ev.name} | ${info.groom.name} & ${info.bride.name}`
+                : (info.pageTitle || document.title);
+
+            document.querySelectorAll("[data-bind]").forEach((el) => {
+                const v = byPath(vm, el.dataset.bind);
+                if (v !== undefined && v !== null) el.textContent = String(v);
+            });
+
+            document.querySelectorAll("[data-bind-html]").forEach((el) => {
+                const v = byPath(vm, el.dataset.bindHtml);
+                if (v !== undefined && v !== null) el.innerHTML = String(v);
+            });
+        })();
+    </script>
+
+</body>
+
+</html>

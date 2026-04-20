@@ -15,334 +15,56 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 
-<body>
+<body class="landing-body">
 
-    <!-- =============================================================
-         DỮ LIỆU THIỆP — CHỈ CẦN CHỈNH Ở ĐÂY
-         Mọi nội dung trên giao diện đều bind từ object `info`
-         ============================================================= -->
-    <script>
-        const info = {
-            /* --- Thông tin chung --- */
-            pageTitle: "Thiệp cưới | Minh Tiến & Thùy Linh",
+    <!-- Dữ liệu dùng chung -->
+    <script src="info.js"></script>
 
-            /* --- Cô dâu / Chú rể --- */
-            groom: {
-                name: "Minh Tiến",
-                fullname: "Lê Minh Tiến",
-                parents: {
-                    father: "Lê Đức Hòa",
-                    mother: "Nguyễn Thị Ngọc Ánh"
-                }
-            },
-            bride: {
-                name: "Thùy Linh",
-                fullname: "Nguyễn Phạm Thùy Linh",
-                parents: {
-                    father: "Nguyễn Nhẫn",
-                    mother: "Phạm Thị Lựu"
-                }
-            },
+    <main class="landing-card">
+        <p class="landing-eyebrow" data-bind="title"></p>
 
-            /* --- Danh sách sự kiện ---
-               date  : "Thứ … - dd/mm/yyyy"  (sẽ được tự tách weekday / dd / mm / yyyy)
-               time  : "HH:mm"
-            */
-            events: [
-                {
-                    id: "engagement",
-                    name: "Đám Hỏi",
-                    date: "Thứ Sáu - 05/06/2026",
-                    date_al: "ÂL: 20/04",
-                    time: "09:00",
-                    venue: "Tư gia nhà gái",
-                    address: "………………………………………… (địa chỉ đám hỏi)"
-                },
-                {
-                    id: "wedding",
-                    name: "Vu Quy",
-                    date: "Thứ Hai - 16/11/2026",
-                    date_al: "ÂL: 08/10",
-                    time: "17:30",
-                    venue: "Tư gia nhà gái",
-                    address: "………………………………………… (địa chỉ vu quy)"
-                }
-            ],
+        <div class="landing-couple">
+            <h1 class="landing-name script" data-bind="groom.name"></h1>
+            <div class="landing-amp">&amp;</div>
+            <h1 class="landing-name script" data-bind="bride.name"></h1>
+        </div>
 
-            /* ========= CARD 1 — SAVE THE DATE ========= */
-            card1: {
-                eyebrowTop: "The Wedding Of",
-                title: "Save the Date",
-                dateDisplay: "16 · 11 · 2026",
-                amp: "&",
-                inviteNote: "Trân trọng kính mời",
-                eyebrowBottom: "Together forever"
-            },
+        <ul class="event-list" data-event-list></ul>
 
-            /* ========= CARD 2 — LỄ THÀNH HÔN ========= */
-            card2: {
-                eventId: "wedding",               // dùng event nào cho ngày giờ
-                title: "Lễ thành hôn của chúng tôi",
-                nhaTraiLabel: "Nhà Trai",
-                nhaGaiLabel: "Nhà Gái",
-                fatherPrefix: "Ông",
-                motherPrefix: "Bà",
-                amp: "&",
-                hourSuffix: "Giờ",                // "Giờ 30" / "Giờ 00"
-                lunarNote: "(Nhằm ngày 08/10 Âm lịch)"
-            },
-
-            /* ========= CARD 3 — TIỆC CƯỚI ========= */
-            card3: {
-                eventId: "wedding",               // dùng event nào cho ngày
-                eyebrowTop: "Wedding Reception",
-                welcome: "Trân trọng kính mời",
-                venueName: "Nhà Hàng Thiên Hương",
-                addressLines: [
-                    "123 Đường ABC, Phường XYZ",
-                    "TP. Hồ Chí Minh"
-                ],
-                time: "18:00",                    // giờ tiệc (có thể khác giờ lễ)
-                hourSuffix: "Giờ",
-                closingLines: [
-                    "Sự hiện diện của quý khách",
-                    "là niềm vinh hạnh cho gia đình chúng tôi."
-                ],
-                eyebrowBottom: "Save our love"
-            }
-        };
-    </script>
-
-
-    <main class="invitation">
-
-        <!-- =============================================
-             CARD 1 — SAVE THE DATE
-             ============================================= -->
-        <section class="card card--save">
-            <p class="eyebrow" data-bind="card1.eyebrowTop"></p>
-
-            <div class="spacer-md"></div>
-            <h1 class="title save-title" data-bind="card1.title"></h1>
-
-            <p class="save-date" data-bind="card1.dateDisplay"></p>
-
-            <div class="divider-ornate"><span>&#10086;</span></div>
-
-            <div class="couple">
-                <span class="script name" data-bind="groom.name"></span>
-                <span class="amp" data-bind="card1.amp"></span>
-                <span class="script name" data-bind="bride.name"></span>
-            </div>
-
-            <div class="divider"></div>
-
-            <p class="invite-note" data-bind="card1.inviteNote"></p>
-
-            <div class="spacer-md"></div>
-            <p class="eyebrow" data-bind="card1.eyebrowBottom"></p>
-        </section>
-
-
-        <!-- =============================================
-             CARD 2 — THÔNG TIN CHÍNH (LỄ THÀNH HÔN)
-             ============================================= -->
-        <section class="card card--main">
-
-            <!-- Gia đình hai bên -->
-            <div class="families">
-                <div class="family">
-                    <p class="role" data-bind="card2.nhaTraiLabel"></p>
-                    <p>
-                        <span data-bind="card2.fatherPrefix"></span>&nbsp;
-                        <span class="parent-name" data-bind="groom.parents.father"></span>
-                    </p>
-                    <p>
-                        <span data-bind="card2.motherPrefix"></span>&nbsp;
-                        <span class="parent-name" data-bind="groom.parents.mother"></span>
-                    </p>
-                </div>
-                <div class="vline"></div>
-                <div class="family">
-                    <p class="role" data-bind="card2.nhaGaiLabel"></p>
-                    <p>
-                        <span data-bind="card2.fatherPrefix"></span>&nbsp;
-                        <span class="parent-name" data-bind="bride.parents.father"></span>
-                    </p>
-                    <p>
-                        <span data-bind="card2.motherPrefix"></span>&nbsp;
-                        <span class="parent-name" data-bind="bride.parents.mother"></span>
-                    </p>
-                </div>
-            </div>
-
-            <div class="divider"></div>
-
-            <p class="main-title" data-bind="card2.title"></p>
-
-            <div class="spacer-md"></div>
-
-            <div class="couple-main">
-                <span class="script name" data-bind="groom.name"></span>
-                <span class="amp" data-bind="card2.amp"></span>
-                <span class="script name" data-bind="bride.name"></span>
-            </div>
-
-            <div class="divider-ornate"><span>&#10086;</span></div>
-
-            <!-- Khối ngày giờ -->
-            <p class="weekday" data-bind="card2.weekday"></p>
-            <div class="date-block">
-                <div class="side">
-                    <span data-bind="card2.hour"></span>
-                    <small data-bind="card2.minuteLabel"></small>
-                </div>
-                <div class="day-big" data-bind="card2.day"></div>
-                <div class="side">
-                    <span data-bind="card2.month"></span>
-                    <small data-bind="card2.year"></small>
-                </div>
-            </div>
-
-            <div class="spacer-md"></div>
-
-            <p class="venue">
-                <strong data-bind="card2.venueName"></strong><br />
-                <span data-bind="card2.venueAddress"></span><br />
-                <span class="muted" data-bind="card2.lunarNote"></span>
-            </p>
-        </section>
-
-
-        <!-- =============================================
-             CARD 3 — TIỆC CƯỚI
-             ============================================= -->
-        <section class="card card--party">
-            <p class="eyebrow" data-bind="card3.eyebrowTop"></p>
-
-            <div class="spacer-md"></div>
-            <p class="welcome" data-bind="card3.welcome"></p>
-
-            <div class="divider"></div>
-
-            <h2 class="venue-name" data-bind="card3.venueName"></h2>
-            <div class="spacer-sm"></div>
-            <p class="venue-address" data-bind-html="card3.addressHtml"></p>
-
-            <div class="divider-ornate"><span>&#10086;</span></div>
-
-            <p class="weekday" data-bind="card3.weekday"></p>
-            <div class="date-block">
-                <div class="side">
-                    <span data-bind="card3.hour"></span>
-                    <small data-bind="card3.minuteLabel"></small>
-                </div>
-                <div class="day-big" data-bind="card3.day"></div>
-                <div class="side">
-                    <span data-bind="card3.month"></span>
-                    <small data-bind="card3.year"></small>
-                </div>
-            </div>
-
-            <div class="divider"></div>
-
-            <p class="closing" data-bind-html="card3.closingHtml"></p>
-
-            <div class="spacer-md"></div>
-            <p class="eyebrow" data-bind="card3.eyebrowBottom"></p>
-        </section>
-
+        <p class="landing-footer" data-bind="landing.footer"></p>
     </main>
 
 
     <!-- =============================================================
-         SCRIPT: BIND `info` → DOM
-         (Không cần chỉnh phần này khi đổi nội dung thiệp)
+         SCRIPT: render danh sách sự kiện & bind label
          ============================================================= -->
     <script>
         (function () {
-            // ---- Helpers ----
-            const parseDate = (s) => {
-                // "Thứ Hai - 16/11/2026"
-                const m = /^\s*(.+?)\s*-\s*(\d{1,2})\/(\d{1,2})\/(\d{4})\s*$/.exec(s || "");
-                return m
-                    ? { weekday: m[1].trim(), day: m[2], month: m[3], year: m[4] }
-                    : { weekday: "", day: "", month: "", year: "" };
-            };
-
-            const parseTime = (s) => {
-                const [h = "", mm = ""] = (s || "").split(":");
-                return { hour: h, minute: mm };
-            };
-
-            const getEvent = (id) =>
-                info.events.find((e) => e.id === id) || info.events[0] || {};
-
-            const linesToHtml = (lines) =>
-                (Array.isArray(lines) ? lines : [lines])
-                    .filter((l) => l != null && l !== "")
-                    .map((l) => String(l))
-                    .join("<br/>");
-
-            // ---- Derived data cho template ----
-            const ev2 = getEvent(info.card2.eventId);
-            const d2 = parseDate(ev2.date);
-            const t2 = parseTime(ev2.time);
-
-            const ev3 = getEvent(info.card3.eventId);
-            const d3 = parseDate(ev3.date);
-            const t3 = parseTime(info.card3.time || ev3.time);
-
-            const hSfx2 = info.card2.hourSuffix || "Giờ";
-            const hSfx3 = info.card3.hourSuffix || "Giờ";
-
-            // ViewModel cuối cùng truyền vào template
-            const vm = {
-                groom: info.groom,
-                bride: info.bride,
-
-                card1: { ...info.card1 },
-
-                card2: {
-                    ...info.card2,
-                    weekday: d2.weekday,
-                    day: d2.day,
-                    month: d2.month,
-                    year: d2.year,
-                    hour: t2.hour,
-                    minuteLabel: hSfx2 + " " + (t2.minute || "00"),
-                    venueName: (ev2.venue || "").toUpperCase(),
-                    venueAddress: ev2.address || ""
-                },
-
-                card3: {
-                    ...info.card3,
-                    weekday: d3.weekday,
-                    day: d3.day,
-                    month: d3.month,
-                    year: d3.year,
-                    hour: t3.hour,
-                    minuteLabel: hSfx3 + " " + (t3.minute || "00"),
-                    addressHtml: linesToHtml(info.card3.addressLines),
-                    closingHtml: linesToHtml(info.card3.closingLines)
-                }
-            };
-
-            // ---- Bind ----
             const byPath = (obj, path) =>
                 path.split(".").reduce((o, k) => (o == null ? undefined : o[k]), obj);
 
-            if (info.pageTitle) document.title = info.pageTitle;
+            document.title = info.pageTitle || document.title;
 
+            /* Bind các text đơn */
             document.querySelectorAll("[data-bind]").forEach((el) => {
-                const v = byPath(vm, el.dataset.bind);
+                const v = byPath(info, el.dataset.bind);
                 if (v !== undefined && v !== null) el.textContent = String(v);
             });
 
-            document.querySelectorAll("[data-bind-html]").forEach((el) => {
-                const v = byPath(vm, el.dataset.bindHtml);
-                if (v !== undefined && v !== null) el.innerHTML = String(v);
-            });
+            /* Render danh sách event */
+            const list = document.querySelector("[data-event-list]");
+            if (list && Array.isArray(info.events)) {
+                list.innerHTML = info.events.map((ev, idx) => `
+                    <li class="event-card-wrap" style="animation-delay:${0.2 + idx * 0.15}s">
+                        <a class="event-card" href="thiep.html?event=${encodeURIComponent(ev.id)}">
+                            <h2 class="event-name">${ev.name}</h2>
+                            <p class="event-date">${ev.date || ""}</p>
+                            <p class="event-date-al">${ev.date_al || ""}</p>
+                            <span class="event-cta">Xem thiệp &rarr;</span>
+                        </a>
+                    </li>
+                `).join("");
+            }
         })();
     </script>
 
