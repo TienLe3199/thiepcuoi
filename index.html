@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Thiệp cưới</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@400;500;700&display=swap"
+        rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        forest: "#1a4325",
+                        sage: "#84a58b",
+                        gold: "#c5a059",
+                        cream: "#fcfbf8"
+                    },
+                    fontFamily: {
+                        names: ['"Great Vibes"', "cursive"],
+                        sans: ['"Montserrat"', "sans-serif"]
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(24px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-up {
+            animation: fadeInUp 1s ease forwards;
+        }
+    </style>
+</head>
+
+<body class="bg-[#15301c] min-h-screen flex items-center justify-center p-6 font-sans">
+    <div class="w-full max-w-3xl bg-cream rounded-3xl shadow-2xl p-8 md:p-14 text-center">
+        <p class="uppercase tracking-[0.3em] text-sage text-sm fade-up">Hành trình chung đôi</p>
+
+        <h1 class="font-names text-6xl md:text-7xl text-forest mt-6 fade-up">Anh Minh</h1>
+        <div class="text-gold text-4xl my-2 fade-up">&</div>
+        <h1 class="font-names text-6xl md:text-7xl text-forest mb-10 fade-up">Trúc Quỳnh</h1>
+
+        <div class="grid gap-6">
+            <div class="border rounded-2xl p-5 bg-white fade-up">
+                <h2 class="text-xl font-bold text-forest">Dạm Ngõ</h2>
+                <p class="text-sage">Thứ Bảy - 25/04/2026</p>
+                <p class="text-sm text-gray-600">ÂL: 09/03</p>
+            </div>
+
+            <div class="border rounded-2xl p-5 bg-white fade-up">
+                <h2 class="text-xl font-bold text-forest">Đám Hỏi</h2>
+                <p class="text-sage">Chủ Nhật - 12/07/2026</p>
+                <p class="text-sm text-gray-600">ÂL: 28/05</p>
+            </div>
+
+            <div class="border rounded-2xl p-5 bg-white fade-up">
+                <h2 class="text-xl font-bold text-forest">Vu Quy</h2>
+                <p class="text-sage">Thứ Hai - 26/10/2026</p>
+                <p class="text-sm text-gray-600">ÂL: 17/09</p>
+            </div>
+        </div>
+
+        <p class="mt-10 text-sage uppercase tracking-[0.3em] text-xs fade-up">Trân trọng kính báo</p>
+    </div>
+</body>
+
+</html>
