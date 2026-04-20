@@ -378,10 +378,10 @@ body {
 /* =========================================================
    BACK LINK (trang chi tiết)
    ========================================================= */
-.back-link {
+.back-link,
+.side-switch {
     position: fixed;
     top: 20px;
-    left: 22px;
     z-index: 10;
     font-family: "Montserrat", sans-serif;
     font-size: 11px;
@@ -397,7 +397,16 @@ body {
     transition: all 0.3s ease;
 }
 
-.back-link:hover {
+.back-link {
+    left: 22px;
+}
+
+.side-switch {
+    right: 22px;
+}
+
+.back-link:hover,
+.side-switch:hover {
     background: rgba(251, 247, 238, 0.15);
     border-color: rgba(251, 247, 238, 0.7);
 }
@@ -612,10 +621,18 @@ body {
         font-size: 32px;
     }
 
-    .back-link {
+    .back-link,
+    .side-switch {
         top: 12px;
-        left: 12px;
         padding: 8px 14px;
         font-size: 10px;
+    }
+
+    .back-link {
+        left: 12px;
+    }
+
+    .side-switch {
+        right: 12px;
     }
 }

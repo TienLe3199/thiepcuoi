@@ -22,6 +22,7 @@
 
     <!-- Nút quay lại trang giới thiệu -->
     <a href="index.html" class="back-link" aria-label="Quay lại">&larr; Trang chủ</a>
+    <a href="#" class="side-switch" data-side-toggle aria-label="Chuyển phía hiển thị"></a>
 
     <main class="invitation">
 
@@ -59,31 +60,7 @@
         <section class="card card--main">
 
             <!-- Gia đình hai bên -->
-            <div class="families">
-                <div class="family">
-                    <p class="role" data-bind="card2.nhaTraiLabel"></p>
-                    <p>
-                        <span data-bind="card2.fatherPrefix"></span>&nbsp;
-                        <span class="parent-name" data-bind="groom.parents.father"></span>
-                    </p>
-                    <p>
-                        <span data-bind="card2.motherPrefix"></span>&nbsp;
-                        <span class="parent-name" data-bind="groom.parents.mother"></span>
-                    </p>
-                </div>
-                <div class="vline"></div>
-                <div class="family">
-                    <p class="role" data-bind="card2.nhaGaiLabel"></p>
-                    <p>
-                        <span data-bind="card2.fatherPrefix"></span>&nbsp;
-                        <span class="parent-name" data-bind="bride.parents.father"></span>
-                    </p>
-                    <p>
-                        <span data-bind="card2.motherPrefix"></span>&nbsp;
-                        <span class="parent-name" data-bind="bride.parents.mother"></span>
-                    </p>
-                </div>
-            </div>
+            <div class="families" data-bind-html="card2.familiesHtml"></div>
 
             <div class="divider"></div>
 
@@ -169,6 +146,14 @@
     <script>
         (function () {
             /* ---- Helpers ---- */
+            const escapeHtml = (value) =>
+                String(value ?? "")
+                    .replace(/&/g, "&amp;")
+                    .replace(/</g, "&lt;")
+                    .replace(/>/g, "&gt;")
+                    .replace(/\"/g, "&quot;")
+                    .replace(/'/g, "&#39;");
+
             const parseDate = (s) => {
                 const m = /^\s*(.+?)\s*-\s*(\d{1,2})\/(\d{1,2})\/(\d{4})\s*$/.exec(s || "");
                 return m
@@ -187,14 +172,61 @@
                     .map((l) => String(l))
                     .join("<br/>");
 
+            const renderFamily = (family, card2) => `
+                <div class="family">
+                    <p class="role">${escapeHtml(family.label)}</p>
+                    <p>
+                        <span>${escapeHtml(card2.fatherPrefix)}</span>&nbsp;
+                        <span class="parent-name">${escapeHtml(family.parents.father)}</span>
+                    </p>
+                    <p>
+                        <span>${escapeHtml(card2.motherPrefix)}</span>&nbsp;
+                        <span class="parent-name">${escapeHtml(family.parents.mother)}</span>
+                    </p>
+                </div>
+            `;
+
             /* ---- Chọn event theo URL: ?event=<id> ---- */
             const params = new URLSearchParams(location.search);
+            const defaultSide = info.defaultSide === "bride" ? "bride" : "groom";
+            const currentSide = params.get("side") === "bride"
+                ? "bride"
+                : (params.get("side") === "groom" ? "groom" : defaultSide);
+            const nextSide = currentSide === "groom" ? "bride" : "groom";
             const eventId = params.get("event")
                 || info.defaultEventId
                 || (info.events[0] && info.events[0].id);
+            const buildUrl = (path, updates = {}) => {
+                const nextParams = new URLSearchParams(location.search);
+                Object.entries(updates).forEach(([key, value]) => {
+                    if (value == null || value === "") nextParams.delete(key);
+                    else nextParams.set(key, value);
+                });
+                const query = nextParams.toString();
+                return query ? `${path}?${query}` : path;
+            };
 
             const ev = info.events.find((e) => e.id === eventId) || info.events[0] || {};
             const party = ev.party || {};
+            const eventName = (ev.nameBySide && ev.nameBySide[currentSide]) || ev.name || "";
+            const card2Title = (ev.card2TitleBySide && ev.card2TitleBySide[currentSide])
+                || ev.card2Title
+                || info.card2.title
+                || eventName;
+            const familyOrder = currentSide === "bride"
+                ? [
+                    { label: info.card2.nhaGaiLabel, parents: info.bride.parents },
+                    { label: info.card2.nhaTraiLabel, parents: info.groom.parents }
+                ]
+                : [
+                    { label: info.card2.nhaTraiLabel, parents: info.groom.parents },
+                    { label: info.card2.nhaGaiLabel, parents: info.bride.parents }
+                ];
+            const familiesHtml = `
+                ${renderFamily(familyOrder[0], info.card2)}
+                <div class="vline"></div>
+                ${renderFamily(familyOrder[1], info.card2)}
+            `;
 
             const d = parseDate(ev.date);              // ngày của lễ (Card 1 + Card 2)
             const t2 = parseTime(ev.time);             // giờ lễ
@@ -221,7 +253,7 @@
 
                 card2: {
                     ...info.card2,
-                    title: ev.card2Title || info.card2.title || ev.name || "",
+                    title: card2Title,
                     weekday: d.weekday,
                     day: d.day,
                     month: d.month,
@@ -230,7 +262,8 @@
                     minuteLabel: hSfx2 + " " + (t2.minute || "00"),
                     venueName: (ev.venue || "").toUpperCase(),
                     venueAddress: ev.address || "",
-                    lunarNote
+                    lunarNote,
+                    familiesHtml
                 },
 
                 card3: {
@@ -252,8 +285,20 @@
             const byPath = (obj, path) =>
                 path.split(".").reduce((o, k) => (o == null ? undefined : o[k]), obj);
 
-            document.title = ev.name
-                ? `${ev.name} | ${info.groom.name} & ${info.bride.name}`
+            const backLink = document.querySelector(".back-link");
+            if (backLink) backLink.href = buildUrl("index.html", { side: currentSide, event: null });
+
+            const switchLink = document.querySelector("[data-side-toggle]");
+            if (switchLink) {
+                switchLink.href = buildUrl("thiep.html", { event: eventId, side: nextSide });
+                switchLink.textContent = nextSide === "groom" ? "Xem chú rể" : "Xem cô dâu";
+                switchLink.title = currentSide === "groom"
+                    ? "Đang xem phía chú rể"
+                    : "Đang xem phía cô dâu";
+            }
+
+            document.title = eventName
+                ? `${eventName} | ${info.groom.name} & ${info.bride.name}`
                 : (info.pageTitle || document.title);
 
             document.querySelectorAll("[data-bind]").forEach((el) => {

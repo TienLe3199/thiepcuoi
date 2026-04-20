@@ -19,6 +19,7 @@
 
     <!-- Dữ liệu dùng chung -->
     <script src="info.js"></script>
+    <a href="#" class="side-switch" data-side-toggle aria-label="Chuyển phía hiển thị"></a>
 
     <main class="landing-card">
         <p class="landing-eyebrow" data-bind="title"></p>
@@ -40,10 +41,36 @@
          ============================================================= -->
     <script>
         (function () {
+            const params = new URLSearchParams(location.search);
             const byPath = (obj, path) =>
                 path.split(".").reduce((o, k) => (o == null ? undefined : o[k]), obj);
+            const defaultSide = info.defaultSide === "bride" ? "bride" : "groom";
+            const currentSide = params.get("side") === "bride"
+                ? "bride"
+                : (params.get("side") === "groom" ? "groom" : defaultSide);
+            const nextSide = currentSide === "groom" ? "bride" : "groom";
+            const getEventName = (event) =>
+                (event.nameBySide && event.nameBySide[currentSide]) || event.name || "";
+            const buildUrl = (path, updates = {}) => {
+                const nextParams = new URLSearchParams(location.search);
+                Object.entries(updates).forEach(([key, value]) => {
+                    if (value == null || value === "") nextParams.delete(key);
+                    else nextParams.set(key, value);
+                });
+                const query = nextParams.toString();
+                return query ? `${path}?${query}` : path;
+            };
 
             document.title = info.pageTitle || document.title;
+
+            const switchLink = document.querySelector("[data-side-toggle]");
+            if (switchLink) {
+                switchLink.href = buildUrl("index.html", { side: nextSide, event: null });
+                switchLink.textContent = nextSide === "groom" ? "Xem chú rể" : "Xem cô dâu";
+                switchLink.title = currentSide === "groom"
+                    ? "Đang xem phía chú rể"
+                    : "Đang xem phía cô dâu";
+            }
 
             /* Bind các text đơn */
             document.querySelectorAll("[data-bind]").forEach((el) => {
@@ -56,8 +83,8 @@
             if (list && Array.isArray(info.events)) {
                 list.innerHTML = info.events.map((ev, idx) => `
                     <li class="event-card-wrap" style="animation-delay:${0.2 + idx * 0.15}s">
-                        <a class="event-card" href="thiep.html?event=${encodeURIComponent(ev.id)}">
-                            <h2 class="event-name">${ev.name}</h2>
+                        <a class="event-card" href="${buildUrl("thiep.html", { event: ev.id, side: currentSide })}">
+                            <h2 class="event-name">${getEventName(ev)}</h2>
                             <p class="event-date">${ev.date || ""}</p>
                             <p class="event-date-al">${ev.date_al || ""}</p>
                             <p class="event-venue">${ev.venue || ""}</p>

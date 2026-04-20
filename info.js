@@ -10,6 +10,7 @@ window.info = {
     /* --- Chung --- */
     pageTitle: "Thiệp cưới | Minh Tiến & Thùy Linh",
     title: "Hành trình chung đôi",            // eyebrow trên trang giới thiệu
+    defaultSide: "groom",
 
     /* --- Cô dâu / Chú rể --- */
     groom: {
@@ -48,14 +49,14 @@ window.info = {
             /* Lễ — hiển thị ở Card 2 */
             time: "09:40",
             venue: "Tư gia nhà gái",
-            address: "36A, đường 100, KP 8 , phường Tăng Nhơn Phú",
+            address: "36A, đường 100, KP8, phường Tăng Nhơn Phú",
 
             /* Tiệc — hiển thị ở Card 3 (nếu không có sẽ dùng giống lễ) */
             party: {
                 time: "11:00",
                 venueName: "Tư gia nhà gái",
                 addressLines: [
-                    "11 Đ. Trương Văn Thành, Khu Phố 4, Tăng Nhơn",
+                    "11, đường Trương Văn Thành, KP4, phường Tăng Nhơn Phú",
                     "TP. Hồ Chí Minh"
                 ]
             },
@@ -67,25 +68,33 @@ window.info = {
         },
         {
             id: "wedding",
-            name: "Vu Quy",
+            name: "Thành Hôn",
+            nameBySide: {
+                groom: "Thành Hôn",
+                bride: "Vu Quy"
+            },
             date: "Thứ Hai - 16/11/2026",
             date_al: "ÂL: 08/10",
 
             time: "09:00",
             venue: "Tư gia nhà gái",
-            address: "36A, đường 100, KP 8 , phường Tăng Nhơn Phú",
+            address: "36A, đường 100, KP8 , phường Tăng Nhơn Phú",
 
             party: {
                 time: "18:00",
                 venueName: "Nhà Hàng Cát Đằng",
                 addressLines: [
-                    "11 Đ. Trương Văn Thành, Khu Phố 4, Tăng Nhơn",
+                    "11, đường Trương Văn Thành, KP4, phường Tăng Nhơn Phú",
                     "TP. Hồ Chí Minh"
                 ]
             },
 
             card1Title: "Save the Date",
             card2Title: "Lễ Thành Hôn của chúng tôi",
+            card2TitleBySide: {
+                groom: "Lễ Thành Hôn của chúng tôi",
+                bride: "Lễ Vu Quy của chúng tôi"
+            },
             card3EyebrowTop: "Wedding Reception"
         }
     ],
