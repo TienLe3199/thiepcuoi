@@ -24,7 +24,7 @@ window.info = {
         name: "Thùy Linh",
         fullname: "Nguyễn Phạm Thùy Linh",
         parents: {
-            father: "Nguyễn Nhẫn",
+            father: "Nguyễn Ngọc Nhẫn",
             mother: "Phạm Thị Lựu"
         }
     },
@@ -46,16 +46,16 @@ window.info = {
             date_al: "ÂL: 20/04",
 
             /* Lễ — hiển thị ở Card 2 */
-            time: "09:00",
+            time: "09:40",
             venue: "Tư gia nhà gái",
-            address: "………………………………………… (địa chỉ đám hỏi)",
+            address: "36A, đường 100, KP 8 , phường Tăng Nhơn Phú",
 
             /* Tiệc — hiển thị ở Card 3 (nếu không có sẽ dùng giống lễ) */
             party: {
-                time: "18:00",
-                venueName: "Nhà Hàng Cát Đằng",
+                time: "11:00",
+                venueName: "Tư gia nhà gái",
                 addressLines: [
-                    "123 Đường ABC, Phường XYZ",
+                    "11 Đ. Trương Văn Thành, Khu Phố 4, Tăng Nhơn",
                     "TP. Hồ Chí Minh"
                 ]
             },
@@ -71,15 +71,15 @@ window.info = {
             date: "Thứ Hai - 16/11/2026",
             date_al: "ÂL: 08/10",
 
-            time: "17:30",
+            time: "09:00",
             venue: "Tư gia nhà gái",
-            address: "………………………………………… (địa chỉ vu quy)",
+            address: "36A, đường 100, KP 8 , phường Tăng Nhơn Phú",
 
             party: {
                 time: "18:00",
                 venueName: "Nhà Hàng Cát Đằng",
                 addressLines: [
-                    "123 Đường ABC, Phường XYZ",
+                    "11 Đ. Trương Văn Thành, Khu Phố 4, Tăng Nhơn",
                     "TP. Hồ Chí Minh"
                 ]
             },

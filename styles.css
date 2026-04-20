@@ -521,6 +521,24 @@ body {
     margin-top: 2px;
 }
 
+.event-venue {
+    margin-top: 12px;
+    font-family: "Montserrat", sans-serif;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: #8a6f3d;
+}
+
+.event-address {
+    margin-top: 6px;
+    font-family: "Cormorant Garamond", serif;
+    font-size: 15px;
+    line-height: 1.5;
+    color: #666;
+}
+
 .event-cta {
     display: inline-block;
     margin-top: 10px;
