@@ -15,6 +15,7 @@
 
     <!-- Dữ liệu dùng chung -->
     <script src="info.js"></script>
+    <script src="transitions.js"></script>
     <a href="#" class="side-switch" data-side-toggle aria-label="Chuyển phía hiển thị"></a>
 
     <main class="landing-card">
@@ -89,7 +90,7 @@
             const list = document.querySelector("[data-event-list]");
             if (list && Array.isArray(info.events)) {
                 list.innerHTML = info.events.map((ev, idx) => `
-                    <li class="event-card-wrap" style="animation-delay:${0.2 + idx * 0.15}s">
+                    <li class="event-card-wrap" style="animation-delay:${0.1 + idx * 0.08}s">
                         <a class="event-card" href="${buildUrl("thiep.html", { event: ev.id, side: currentSide })}">
                             <h2 class="event-name">${getEventName(ev)}</h2>
                             <p class="event-date">${getEventValue(ev, "date")}</p>
