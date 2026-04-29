@@ -6,12 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Thiệp cưới</title>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Great+Vibes&family=Montserrat:wght@300;400;500;600&display=swap"
-        rel="stylesheet">
-
     <link rel="stylesheet" href="styles.css">
 </head>
 
@@ -49,8 +43,19 @@
                 ? "bride"
                 : (params.get("side") === "groom" ? "groom" : defaultSide);
             const nextSide = currentSide === "groom" ? "bride" : "groom";
-            const getEventName = (event) =>
-                (event.nameBySide && event.nameBySide[currentSide]) || event.name || "";
+            const getSideDetails = (event) =>
+                (event.detailsBySide && event.detailsBySide[currentSide]) || {};
+            const getEventValue = (event, key) => {
+                const sideDetails = getSideDetails(event);
+                return sideDetails[key] ?? event[key] ?? "";
+            };
+            const getEventName = (event) => {
+                const sideDetails = getSideDetails(event);
+                return sideDetails.name
+                    || (event.nameBySide && event.nameBySide[currentSide])
+                    || event.name
+                    || "";
+            };
             const buildUrl = (path, updates = {}) => {
                 const nextParams = new URLSearchParams(location.search);
                 Object.entries(updates).forEach(([key, value]) => {
@@ -85,10 +90,10 @@
                     <li class="event-card-wrap" style="animation-delay:${0.2 + idx * 0.15}s">
                         <a class="event-card" href="${buildUrl("thiep.html", { event: ev.id, side: currentSide })}">
                             <h2 class="event-name">${getEventName(ev)}</h2>
-                            <p class="event-date">${ev.date || ""}</p>
-                            <p class="event-date-al">${ev.date_al || ""}</p>
-                            <p class="event-venue">${ev.venue || ""}</p>
-                            <p class="event-address">${ev.address || ""}</p>
+                            <p class="event-date">${getEventValue(ev, "date")}</p>
+                            <p class="event-date-al">${getEventValue(ev, "date_al")}</p>
+                            <p class="event-venue">${getEventValue(ev, "venue")}</p>
+                            <p class="event-address">${getEventValue(ev, "address")}</p>
                             <span class="event-cta">Xem thiệp &rarr;</span>
                         </a>
                     </li>

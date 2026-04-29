@@ -6,12 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Thiệp cưới</title>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Great+Vibes&family=Montserrat:wght@300;400;500;600&display=swap"
-        rel="stylesheet">
-
     <link rel="stylesheet" href="styles.css">
 </head>
 
@@ -55,7 +49,7 @@
 
 
         <!-- =============================================
-             CARD 2 — LỄ (Đám Hỏi / Vu Quy / …)
+             CARD 2 — LỄ (Lễ Đính Hôn / Vu Quy / …)
              ============================================= -->
         <section class="card card--main">
 
@@ -207,9 +201,15 @@
             };
 
             const ev = info.events.find((e) => e.id === eventId) || info.events[0] || {};
-            const party = ev.party || {};
-            const eventName = (ev.nameBySide && ev.nameBySide[currentSide]) || ev.name || "";
-            const card2Title = (ev.card2TitleBySide && ev.card2TitleBySide[currentSide])
+            const sideDetails = (ev.detailsBySide && ev.detailsBySide[currentSide]) || {};
+            const getEventValue = (key) => sideDetails[key] ?? ev[key] ?? "";
+            const party = (ev.partyBySide && ev.partyBySide[currentSide]) || ev.party || {};
+            const eventName = sideDetails.name
+                || (ev.nameBySide && ev.nameBySide[currentSide])
+                || ev.name
+                || "";
+            const card2Title = sideDetails.card2Title
+                || (ev.card2TitleBySide && ev.card2TitleBySide[currentSide])
                 || ev.card2Title
                 || info.card2.title
                 || eventName;
@@ -228,14 +228,14 @@
                 ${renderFamily(familyOrder[1], info.card2)}
             `;
 
-            const d = parseDate(ev.date);              // ngày của lễ (Card 1 + Card 2)
-            const t2 = parseTime(ev.time);             // giờ lễ
-            const t3 = parseTime(party.time || ev.time); // giờ tiệc
+            const d = parseDate(getEventValue("date"));              // ngày của lễ (Card 1 + Card 2)
+            const t2 = parseTime(getEventValue("time"));             // giờ lễ
+            const t3 = parseTime(party.time || getEventValue("time")); // giờ tiệc
 
             const hSfx2 = info.card2.hourSuffix || "Giờ";
             const hSfx3 = info.card3.hourSuffix || "Giờ";
 
-            const lunarRaw = (ev.date_al || "").replace(/^ÂL\s*:\s*/i, "").trim();
+            const lunarRaw = (getEventValue("date_al") || "").replace(/^ÂL\s*:\s*/i, "").trim();
             const lunarNote = lunarRaw ? `(Nhằm ngày ${lunarRaw} Âm lịch)` : "";
 
             /* ---- ViewModel ---- */
@@ -245,7 +245,7 @@
 
                 card1: {
                     ...info.card1,
-                    title: ev.card1Title || info.card1.title || "Save the Date",
+                    title: sideDetails.card1Title || ev.card1Title || info.card1.title || "Save the Date",
                     dateDisplay: (d.day && d.month && d.year)
                         ? `${d.day} · ${d.month} · ${d.year}`
                         : ""
@@ -260,15 +260,15 @@
                     year: d.year,
                     hour: t2.hour,
                     minuteLabel: hSfx2 + " " + (t2.minute || "00"),
-                    venueName: (ev.venue || "").toUpperCase(),
-                    venueAddress: ev.address || "",
+                    venueName: (getEventValue("venue") || "").toUpperCase(),
+                    venueAddress: getEventValue("address"),
                     lunarNote,
                     familiesHtml
                 },
 
                 card3: {
                     ...info.card3,
-                    eyebrowTop: ev.card3EyebrowTop || info.card3.eyebrowTop || "",
+                    eyebrowTop: sideDetails.card3EyebrowTop || ev.card3EyebrowTop || info.card3.eyebrowTop || "",
                     venueName: party.venueName || info.card3.venueName || "",
                     weekday: d.weekday,
                     day: d.day,

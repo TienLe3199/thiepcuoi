@@ -37,12 +37,13 @@ window.info = {
 
        date  : "Thứ … - dd/mm/yyyy"
        time  : "HH:mm"                (giờ lễ, dùng cho Card 2)
+       detailsBySide: (tuỳ chọn) ghi đè thông tin lễ theo groom/bride
        party : (tuỳ chọn) thông tin tiệc, dùng cho Card 3
     */
     events: [
         {
             id: "engagement",
-            name: "Đám Hỏi",
+            name: "Lễ Đính Hôn",
             date: "Thứ Sáu - 05/06/2026",
             date_al: "ÂL: 20/04",
 
@@ -63,22 +64,32 @@ window.info = {
 
             /* Tuỳ biến chữ trên thẻ chi tiết */
             card1Title: "Save the Date",
-            card2Title: "Lễ Đám Hỏi của chúng tôi",
+            card2Title: "Lễ đính hôn của chúng tôi",
             card3EyebrowTop: "Engagement Party"
         },
         {
             id: "wedding",
             name: "Tân Hôn",
-            nameBySide: {
-                groom: "Tân Hôn",
-                bride: "Vu Quy"
+            detailsBySide: {
+                groom: {
+                    name: "Tân Hôn",
+                    card2Title: "Lễ Tân Hôn của chúng tôi",
+                    date: "Thứ Hai - 16/11/2026",
+                    date_al: "ÂL: 08/10",
+                    time: "09:00",
+                    venue: "Tư gia nhà trai",
+                    address: "61, đường Nam Cao, KP15 , phường Tăng Nhơn Phú"
+                },
+                bride: {
+                    name: "Vu Quy",
+                    card2Title: "Lễ Vu Quy của chúng tôi",
+                    date: "Chủ Nhật - 15/11/2026",
+                    date_al: "ÂL: 07/10",
+                    time: "09:00",
+                    venue: "Tư gia nhà gái",
+                    address: "36A, đường 100, KP8, phường Tăng Nhơn Phú"
+                }
             },
-            date: "Thứ Hai - 16/11/2026",
-            date_al: "ÂL: 08/10",
-
-            time: "09:00",
-            venue: "Tư gia nhà gái",
-            address: "36A, đường 100, KP8 , phường Tăng Nhơn Phú",
 
             party: {
                 time: "18:00",
@@ -90,11 +101,6 @@ window.info = {
             },
 
             card1Title: "Save the Date",
-            card2Title: "Lễ Tân Hôn của chúng tôi",
-            card2TitleBySide: {
-                groom: "Lễ Tân Hôn của chúng tôi",
-                bride: "Lễ Vu Quy của chúng tôi"
-            },
             card3EyebrowTop: "Wedding Reception"
         }
     ],

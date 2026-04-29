@@ -1,3 +1,16 @@
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Great+Vibes&family=Montserrat:wght@300;400;500;600&display=swap");
+
+/* =========================================================
+   FONT SETTINGS
+   Doi font tai day de ap dung cho toan bo thiep.
+   Neu dung font Google moi, doi luon dong @import phia tren.
+   ========================================================= */
+:root {
+    --font-body: "Montserrat", "Helvetica Neue", Arial, sans-serif;
+    --font-serif: "Cormorant Garamond", "Times New Roman", serif;
+    --font-script: "Great Vibes", cursive;
+}
+
 /* =========================================================
    RESET & BASE
    ========================================================= */
@@ -13,7 +26,7 @@ body {
 }
 
 body {
-    font-family: "Montserrat", "Helvetica Neue", Arial, sans-serif;
+    font-family: var(--font-body);
     color: #555;
     background: #0d0d0d url("assets/bg.png") center center / cover no-repeat fixed;
     min-height: 100vh;
@@ -82,7 +95,7 @@ body {
    TYPOGRAPHY
    ========================================================= */
 .eyebrow {
-    font-family: "Montserrat", sans-serif;
+    font-family: var(--font-body);
     font-size: 12px;
     font-weight: 500;
     letter-spacing: 0.45em;
@@ -91,7 +104,7 @@ body {
 }
 
 .title {
-    font-family: "Cormorant Garamond", "Times New Roman", serif;
+    font-family: var(--font-serif);
     font-weight: 400;
     letter-spacing: 0.3em;
     text-transform: uppercase;
@@ -99,7 +112,7 @@ body {
 }
 
 .script {
-    font-family: "Great Vibes", cursive;
+    font-family: var(--font-script);
     color: #3d3d3d;
     font-weight: 400;
     line-height: 1.1;
@@ -153,7 +166,7 @@ body {
 
 .card--save .save-date {
     margin-top: 18px;
-    font-family: "Cormorant Garamond", serif;
+    font-family: var(--font-serif);
     font-size: 14px;
     letter-spacing: 0.35em;
     text-transform: uppercase;
@@ -170,7 +183,7 @@ body {
 }
 
 .card--save .couple .amp {
-    font-family: "Cormorant Garamond", serif;
+    font-family: var(--font-serif);
     font-style: italic;
     font-size: 36px;
     color: #b89968;
@@ -179,7 +192,7 @@ body {
 }
 
 .card--save .invite-note {
-    font-family: "Cormorant Garamond", serif;
+    font-family: var(--font-serif);
     font-style: italic;
     font-size: 20px;
     color: #666;
@@ -199,14 +212,14 @@ body {
 }
 
 .families .family {
-    font-family: "Cormorant Garamond", serif;
+    font-family: var(--font-serif);
     color: #555;
     font-size: 14px;
     line-height: 1.7;
 }
 
 .families .family .role {
-    font-family: "Montserrat", sans-serif;
+    font-family: var(--font-body);
     font-size: 10px;
     letter-spacing: 0.35em;
     text-transform: uppercase;
@@ -227,7 +240,7 @@ body {
 }
 
 .card--main .main-title {
-    font-family: "Cormorant Garamond", serif;
+    font-family: var(--font-serif);
     font-weight: 400;
     font-size: 18px;
     letter-spacing: 0.3em;
@@ -242,7 +255,7 @@ body {
 }
 
 .card--main .couple-main .amp {
-    font-family: "Cormorant Garamond", serif;
+    font-family: var(--font-serif);
     font-style: italic;
     font-size: 28px;
     color: #b89968;
@@ -259,7 +272,7 @@ body {
 }
 
 .date-block .side {
-    font-family: "Cormorant Garamond", serif;
+    font-family: var(--font-serif);
     font-size: 15px;
     letter-spacing: 0.25em;
     text-transform: uppercase;
@@ -275,7 +288,7 @@ body {
 }
 
 .date-block .day-big {
-    font-family: "Cormorant Garamond", serif;
+    font-family: var(--font-serif);
     font-weight: 500;
     font-size: 68px;
     line-height: 1;
@@ -286,7 +299,7 @@ body {
 }
 
 .weekday {
-    font-family: "Montserrat", sans-serif;
+    font-family: var(--font-body);
     font-size: 11px;
     letter-spacing: 0.4em;
     text-transform: uppercase;
@@ -294,7 +307,7 @@ body {
 }
 
 .venue {
-    font-family: "Cormorant Garamond", serif;
+    font-family: var(--font-serif);
     font-size: 15px;
     line-height: 1.6;
     color: #555;
@@ -310,14 +323,14 @@ body {
    CARD 3 — TIỆC CƯỚI
    ========================================================= */
 .card--party .welcome {
-    font-family: "Cormorant Garamond", serif;
+    font-family: var(--font-serif);
     font-style: italic;
     font-size: 22px;
     color: #666;
 }
 
 .card--party .venue-name {
-    font-family: "Cormorant Garamond", serif;
+    font-family: var(--font-serif);
     font-size: 30px;
     font-weight: 500;
     letter-spacing: 0.15em;
@@ -327,7 +340,7 @@ body {
 }
 
 .card--party .venue-address {
-    font-family: "Cormorant Garamond", serif;
+    font-family: var(--font-serif);
     font-size: 14px;
     color: #777;
     line-height: 1.6;
@@ -336,7 +349,7 @@ body {
 }
 
 .card--party .closing {
-    font-family: "Cormorant Garamond", serif;
+    font-family: var(--font-serif);
     font-style: italic;
     font-size: 16px;
     color: #777;
@@ -383,7 +396,7 @@ body {
     position: fixed;
     top: 20px;
     z-index: 10;
-    font-family: "Montserrat", sans-serif;
+    font-family: var(--font-body);
     font-size: 11px;
     letter-spacing: 0.35em;
     text-transform: uppercase;
@@ -430,7 +443,7 @@ body {
 }
 
 .landing-eyebrow {
-    font-family: "Montserrat", sans-serif;
+    font-family: var(--font-body);
     font-size: 12px;
     font-weight: 500;
     letter-spacing: 0.45em;
@@ -444,7 +457,7 @@ body {
 }
 
 .landing-name {
-    font-family: "Great Vibes", cursive;
+    font-family: var(--font-script);
     font-size: 84px;
     color: #1a4325;
     font-weight: 400;
@@ -452,7 +465,7 @@ body {
 }
 
 .landing-amp {
-    font-family: "Cormorant Garamond", serif;
+    font-family: var(--font-serif);
     font-style: italic;
     font-size: 40px;
     color: #c5a059;
@@ -507,7 +520,7 @@ body {
 }
 
 .event-name {
-    font-family: "Cormorant Garamond", serif;
+    font-family: var(--font-serif);
     font-weight: 600;
     font-size: 24px;
     letter-spacing: 0.06em;
@@ -516,14 +529,14 @@ body {
 }
 
 .event-date {
-    font-family: "Cormorant Garamond", serif;
+    font-family: var(--font-serif);
     font-size: 15px;
     color: #84a58b;
     letter-spacing: 0.04em;
 }
 
 .event-date-al {
-    font-family: "Montserrat", sans-serif;
+    font-family: var(--font-body);
     font-size: 12px;
     color: #999;
     letter-spacing: 0.1em;
@@ -532,7 +545,7 @@ body {
 
 .event-venue {
     margin-top: 12px;
-    font-family: "Montserrat", sans-serif;
+    font-family: var(--font-body);
     font-size: 10px;
     font-weight: 600;
     letter-spacing: 0.28em;
@@ -542,7 +555,7 @@ body {
 
 .event-address {
     margin-top: 6px;
-    font-family: "Cormorant Garamond", serif;
+    font-family: var(--font-serif);
     font-size: 15px;
     line-height: 1.5;
     color: #666;
@@ -551,7 +564,7 @@ body {
 .event-cta {
     display: inline-block;
     margin-top: 10px;
-    font-family: "Montserrat", sans-serif;
+    font-family: var(--font-body);
     font-size: 10px;
     letter-spacing: 0.35em;
     text-transform: uppercase;
@@ -567,7 +580,7 @@ body {
 }
 
 .landing-footer {
-    font-family: "Montserrat", sans-serif;
+    font-family: var(--font-body);
     font-size: 11px;
     font-weight: 500;
     letter-spacing: 0.45em;
