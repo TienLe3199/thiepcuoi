@@ -1,16 +1,18 @@
-@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Great+Vibes&family=Montserrat:wght@300;400;500;600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600&family=Cormorant+Garamond:wght@300;400;500;600&family=Great+Vibes&family=Montserrat:wght@300;400;500;600&display=swap");
 
 /* =========================================================
    FONT SETTINGS
    Doi font tai day de ap dung cho toan bo thiep.
    Neu dung font Google moi, doi luon dong @import phia tren.
    ========================================================= */
-:root {
-    --font-body: "Montserrat", "Helvetica Neue", Arial, sans-serif;
+   :root {
+    --font-body: "Cormorant Garamond", "Times New Roman", serif;
     --font-serif: "Cormorant Garamond", "Times New Roman", serif;
     --font-script: "Great Vibes", cursive;
-}
 
+    --font-date: "Cormorant Garamond", "Times New Roman", serif;
+    --font-address: "Cormorant Garamond", "Times New Roman", serif;
+}
 /* =========================================================
    RESET & BASE
    ========================================================= */
@@ -166,7 +168,7 @@ body {
 
 .card--save .save-date {
     margin-top: 18px;
-    font-family: var(--font-serif);
+    font-family: var(--font-date);
     font-size: 14px;
     letter-spacing: 0.35em;
     text-transform: uppercase;
@@ -272,7 +274,7 @@ body {
 }
 
 .date-block .side {
-    font-family: var(--font-serif);
+    font-family: var(--font-date);
     font-size: 15px;
     letter-spacing: 0.25em;
     text-transform: uppercase;
@@ -288,7 +290,7 @@ body {
 }
 
 .date-block .day-big {
-    font-family: var(--font-serif);
+    font-family: var(--font-date);
     font-weight: 500;
     font-size: 68px;
     line-height: 1;
@@ -299,7 +301,7 @@ body {
 }
 
 .weekday {
-    font-family: var(--font-body);
+    font-family: var(--font-date);
     font-size: 11px;
     letter-spacing: 0.4em;
     text-transform: uppercase;
@@ -307,7 +309,7 @@ body {
 }
 
 .venue {
-    font-family: var(--font-serif);
+    font-family: var(--font-address);
     font-size: 15px;
     line-height: 1.6;
     color: #555;
@@ -340,7 +342,7 @@ body {
 }
 
 .card--party .venue-address {
-    font-family: var(--font-serif);
+    font-family: var(--font-address);
     font-size: 14px;
     color: #777;
     line-height: 1.6;
@@ -529,14 +531,14 @@ body {
 }
 
 .event-date {
-    font-family: var(--font-serif);
+    font-family: var(--font-date);
     font-size: 15px;
     color: #84a58b;
     letter-spacing: 0.04em;
 }
 
 .event-date-al {
-    font-family: var(--font-body);
+    font-family: var(--font-date);
     font-size: 12px;
     color: #999;
     letter-spacing: 0.1em;
@@ -555,7 +557,7 @@ body {
 
 .event-address {
     margin-top: 6px;
-    font-family: var(--font-serif);
+    font-family: var(--font-address);
     font-size: 15px;
     line-height: 1.5;
     color: #666;
