@@ -57,7 +57,7 @@ window.info = {
                 time: "11:00",
                 venueName: "Tư gia nhà gái",
                 addressLines: [
-                    "11, đường Trương Văn Thành, KP4, phường Tăng Nhơn Phú",
+                    "36A, đường 100, KP8, phường Tăng Nhơn Phú",
                     "TP. Hồ Chí Minh"
                 ]
             },
