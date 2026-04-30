@@ -40,7 +40,42 @@ body {
 }
 
 html {
-    background: #0d0d0d url("assets/bg.png") center center / cover no-repeat fixed;
+    background: #0d0d0d;
+}
+
+/* =========================================================
+   BACKGROUND ROTATOR
+   - 2 layer fixed chồng nhau, crossfade opacity
+   - z-index: -1 để luôn nằm dưới mọi nội dung
+   ========================================================= */
+.bg-rotator {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background: #0d0d0d;
+    overflow: hidden;
+}
+
+.bg-rotator__layer {
+    position: absolute;
+    inset: 0;
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    opacity: 0;
+    transition: opacity 1.2s ease-in-out;
+    will-change: opacity;
+}
+
+.bg-rotator__layer.is-active {
+    opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .bg-rotator__layer {
+        transition-duration: 0.001ms !important;
+    }
 }
 
 body {

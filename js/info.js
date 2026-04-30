@@ -12,6 +12,18 @@ window.info = {
     title: "Hành trình chung đôi",            // eyebrow trên trang giới thiệu
     defaultSide: "groom",
 
+    /* --- Background xoay vòng ---
+       Danh sách ảnh nền sẽ tự động luân phiên (crossfade) sau mỗi
+       `backgroundIntervalMs` mili-giây. Thêm/bớt đường dẫn tuỳ ý.
+    */
+    backgrounds: [
+        "assets/bg.png",
+        "assets/bg1.png",
+        "assets/bg2.jpeg"
+    ],
+    backgroundIntervalMs: 10000,
+    backgroundFadeMs: 1200,
+
     /* --- Cô dâu / Chú rể --- */
     groom: {
         name: "Minh Tiến",
