@@ -12,7 +12,7 @@
     const cfg = (typeof window !== "undefined" && window.info) || {};
     const sources = (Array.isArray(cfg.backgrounds) && cfg.backgrounds.length)
         ? cfg.backgrounds.slice()
-        : ["assets/bg.png", "assets/bg1.png", "assets/bg2.jpeg"];
+        : ["assets/bg.jpg", "assets/bg1.jpg", "assets/bg2.jpg"];
 
     if (!sources.length) return;
 
@@ -53,6 +53,16 @@
             img.src = src;
         });
     };
+
+    /* Báo cho loader biết khi ảnh đầu tiên đã sẵn sàng */
+    const signalReady = () => {
+        const evt = new Event("app:bg-ready");
+        window.dispatchEvent(evt);
+    };
+    const firstImg = new Image();
+    firstImg.onload = signalReady;
+    firstImg.onerror = signalReady; /* nếu lỗi cũng vẫn cho qua, đừng treo */
+    firstImg.src = sources[0];
 
     const swap = () => {
         activeIndex = (activeIndex + 1) % sources.length;

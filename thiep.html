@@ -15,7 +15,10 @@
 
     <!-- Dữ liệu dùng chung -->
     <script src="js/info.js"></script>
+    <script src="js/loader.js"></script>
     <script src="js/bg-rotator.js"></script>
+    <script src="js/envelope.js"></script>
+    <script src="js/music.js"></script>
     <script src="js/transitions.js"></script>
 
     <!-- Nút quay lại trang giới thiệu -->
@@ -94,6 +97,15 @@
                 <span data-bind="card2.venueAddress"></span><br />
                 <span class="muted" data-bind="card2.lunarNote"></span>
             </p>
+
+            <a class="maps-btn" target="_blank" rel="noopener"
+               data-bind-href="card2.mapsUrl"
+               aria-label="Xem bản đồ địa điểm lễ">
+                <svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true">
+                    <path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 14.5 9 2.5 2.5 0 0 1 12 11.5z"/>
+                </svg>
+                <span>Xem bản đồ</span>
+            </a>
         </section>
 
 
@@ -111,6 +123,15 @@
             <h2 class="venue-name" data-bind="card3.venueName"></h2>
             <div class="spacer-sm"></div>
             <p class="venue-address" data-bind-html="card3.addressHtml"></p>
+
+            <a class="maps-btn" target="_blank" rel="noopener"
+               data-bind-href="card3.mapsUrl"
+               aria-label="Xem bản đồ địa điểm tiệc">
+                <svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true">
+                    <path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 14.5 9 2.5 2.5 0 0 1 12 11.5z"/>
+                </svg>
+                <span>Xem bản đồ</span>
+            </a>
 
             <div class="divider-ornate"><span>&#10086;</span></div>
 
@@ -242,6 +263,18 @@
             const lunarRaw = (getEventValue("date_al") || "").replace(/^ÂL\s*:\s*/i, "").trim();
             const lunarNote = lunarRaw ? `(Nhằm ngày ${lunarRaw} Âm lịch)` : "";
 
+            /* ---- Google Maps URL ---- */
+            const buildMapsUrl = (parts) => {
+                const q = (Array.isArray(parts) ? parts : [parts])
+                    .filter(Boolean).join(", ").trim();
+                return q ? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(q)}` : "";
+            };
+            const card2MapsUrl = sideDetails.mapsUrl
+                || ev.mapsUrl
+                || buildMapsUrl([getEventValue("venue"), getEventValue("address")]);
+            const card3MapsUrl = (party && party.mapsUrl)
+                || buildMapsUrl([party.venueName, ...(party.addressLines || info.card3.addressLines || [])]);
+
             /* ---- ViewModel ---- */
             const vm = {
                 groom: info.groom,
@@ -267,7 +300,8 @@
                     venueName: (getEventValue("venue") || "").toUpperCase(),
                     venueAddress: getEventValue("address"),
                     lunarNote,
-                    familiesHtml
+                    familiesHtml,
+                    mapsUrl: card2MapsUrl
                 },
 
                 card3: {
@@ -281,7 +315,8 @@
                     hour: t3.hour,
                     minuteLabel: hSfx3 + " " + (t3.minute || "00"),
                     addressHtml: linesToHtml(party.addressLines || info.card3.addressLines || []),
-                    closingHtml: linesToHtml(info.card3.closingLines)
+                    closingHtml: linesToHtml(info.card3.closingLines),
+                    mapsUrl: card3MapsUrl
                 }
             };
 
@@ -313,6 +348,15 @@
             document.querySelectorAll("[data-bind-html]").forEach((el) => {
                 const v = byPath(vm, el.dataset.bindHtml);
                 if (v !== undefined && v !== null) el.innerHTML = String(v);
+            });
+
+            document.querySelectorAll("[data-bind-href]").forEach((el) => {
+                const v = byPath(vm, el.dataset.bindHref);
+                if (v) {
+                    el.setAttribute("href", String(v));
+                } else {
+                    el.style.display = "none";
+                }
             });
         })();
     </script>

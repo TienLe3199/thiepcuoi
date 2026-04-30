@@ -17,12 +17,22 @@ window.info = {
        `backgroundIntervalMs` mili-giây. Thêm/bớt đường dẫn tuỳ ý.
     */
     backgrounds: [
-        "assets/bg.png",
-        "assets/bg1.png",
-        "assets/bg2.jpeg"
+        "assets/bg.jpg",
+        "assets/bg1.jpg",
+        "assets/bg2.jpg"
     ],
     backgroundIntervalMs: 10000,
     backgroundFadeMs: 1200,
+
+    /* --- Nhạc nền ---
+       Đặt file mp3 vào assets/ rồi điền tên file vào `src`.
+       Nếu để trống hoặc file không tồn tại, nút sẽ tự ẩn.
+    */
+    music: {
+        src: "assets/music.mp3",
+        volume: 0.35,
+        autoplayHint: "Bật nhạc nền"
+    },
 
     /* --- Cô dâu / Chú rể --- */
     groom: {
