@@ -29,7 +29,7 @@ window.info = {
        Nếu để trống hoặc file không tồn tại, nút sẽ tự ẩn.
     */
     music: {
-        src: "assets/music.mp3",
+        src: "music/music.mp3",
         volume: 0.35,
         autoplayHint: "Bật nhạc nền"
     },

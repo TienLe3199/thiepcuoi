@@ -263,17 +263,29 @@
             const lunarRaw = (getEventValue("date_al") || "").replace(/^ÂL\s*:\s*/i, "").trim();
             const lunarNote = lunarRaw ? `(Nhằm ngày ${lunarRaw} Âm lịch)` : "";
 
-            /* ---- Google Maps URL ---- */
+            /* ---- Google Maps URL ----
+               - Nếu event/party có `mapsUrl` riêng → dùng cái đó.
+               - Nếu là "Tư gia nhà trai/nhà gái" → bỏ tên venue,
+                 chỉ encode địa chỉ (vì "tư gia" không nằm trên Maps,
+                 đưa vào sẽ làm Google search nhầm).
+               - Còn lại auto-encode venue + address vào Google Maps search. */
             const buildMapsUrl = (parts) => {
                 const q = (Array.isArray(parts) ? parts : [parts])
                     .filter(Boolean).join(", ").trim();
                 return q ? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(q)}` : "";
             };
+            const isPrivateHome = (venue) => /t[ưu]\s*gia/i.test(String(venue || ""));
+
+            const venue2 = getEventValue("venue");
+            const addr2 = getEventValue("address");
             const card2MapsUrl = sideDetails.mapsUrl
                 || ev.mapsUrl
-                || buildMapsUrl([getEventValue("venue"), getEventValue("address")]);
+                || buildMapsUrl(isPrivateHome(venue2) ? [addr2] : [venue2, addr2]);
+
+            const venue3 = party.venueName || info.card3.venueName || "";
+            const addrLines3 = party.addressLines || info.card3.addressLines || [];
             const card3MapsUrl = (party && party.mapsUrl)
-                || buildMapsUrl([party.venueName, ...(party.addressLines || info.card3.addressLines || [])]);
+                || buildMapsUrl(isPrivateHome(venue3) ? addrLines3 : [venue3, ...addrLines3]);
 
             /* ---- ViewModel ---- */
             const vm = {
