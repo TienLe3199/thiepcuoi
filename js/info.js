@@ -57,10 +57,30 @@ window.info = {
        Khi click sẽ mở `thiep.html?event=<id>` và bind dữ liệu của
        event đó vào 3 thẻ chi tiết.
 
-       date  : "Thứ … - dd/mm/yyyy"
-       time  : "HH:mm"                (giờ lễ, dùng cho Card 2)
-       detailsBySide: (tuỳ chọn) ghi đè thông tin lễ theo groom/bride
-       party : (tuỳ chọn) thông tin tiệc, dùng cho Card 3
+       Trường cấp 1 (áp dụng cho cả 2 phía):
+         date    : "Thứ … - dd/mm/yyyy"
+         date_al : "ÂL: dd/mm"
+         time    : "HH:mm"               (giờ lễ, dùng cho Card 2)
+         venue   : tên nơi tổ chức lễ
+         address : địa chỉ lễ
+
+       Trường tách riêng theo phía:
+         detailsBySide : { groom: {...}, bride: {...} } — ghi đè
+                         các trường ở cấp 1 (date, time, venue, address,
+                         name, card2Title, card3EyebrowTop, mapsUrl…)
+         partyBySide   : { groom: {...}, bride: {...} } — toàn bộ
+                         party riêng cho từng phía (hiếm dùng).
+
+       Trường tiệc (Card 3):
+         party = {
+           time         : "HH:mm",
+           venueName    : "Tên nhà hàng",
+           lobby        : "Tên sảnh"          // 1 sảnh chung cho 2 phía
+                  HOẶC
+           lobbyBySide  : { groom: "...", bride: "..." }, // tách 2 sảnh
+           addressLines : ["Dòng 1", "Dòng 2", ...],
+           mapsUrl      : "https://..."       // (tuỳ chọn) ghi đè URL Maps
+         }
     */
     events: [
         {

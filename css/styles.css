@@ -464,13 +464,36 @@ body {
 }
 
 .card--party .venue-lobby {
-    margin-top: 8px;
+    margin: 12px auto 0;
     font-family: var(--font-serif);
     font-weight: 500;
-    font-size: 13px;
-    letter-spacing: 0.32em;
+    font-size: 12px;
+    letter-spacing: 0.34em;
     text-transform: uppercase;
     color: var(--color-gold);
+    text-align: center;
+    line-height: 1.4;
+    /* 2 đường gold mảnh ôm hai bên dòng sảnh, gợi cảm giác
+       thiệp gắn riềm vàng cao cấp. */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    max-width: 88%;
+}
+
+.card--party .venue-lobby::before,
+.card--party .venue-lobby::after {
+    content: "";
+    flex: 1 1 auto;
+    max-width: 56px;
+    height: 1px;
+    background: linear-gradient(
+        to right,
+        transparent 0%,
+        rgba(184, 153, 104, 0.55) 50%,
+        transparent 100%
+    );
 }
 
 .card--party .venue-address {
@@ -1105,6 +1128,23 @@ body {
 
     .date-block .day-big {
         font-size: 60px;
+    }
+
+    .card--party .venue-name {
+        font-size: 26px;
+        letter-spacing: 0.12em;
+    }
+
+    .card--party .venue-lobby {
+        font-size: 11px;
+        letter-spacing: 0.26em;
+        gap: 10px;
+        max-width: 92%;
+    }
+
+    .card--party .venue-lobby::before,
+    .card--party .venue-lobby::after {
+        max-width: 36px;
     }
 
     .landing-card {
