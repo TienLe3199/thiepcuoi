@@ -121,6 +121,7 @@
             <div class="divider"></div>
 
             <h2 class="venue-name" data-bind="card3.venueName"></h2>
+            <p class="venue-lobby" data-bind="card3.lobby" data-hide-empty="true"></p>
             <div class="spacer-sm"></div>
             <p class="venue-address" data-bind-html="card3.addressHtml"></p>
 
@@ -287,6 +288,17 @@
             const card3MapsUrl = (party && party.mapsUrl)
                 || buildMapsUrl(isPrivateHome(venue3) ? addrLines3 : [venue3, ...addrLines3]);
 
+            /* Sảnh tiệc — ưu tiên lobbyBySide[currentSide], rồi đến lobby (chuỗi).
+               Cho phép khai báo ở cả party hoặc info.card3. */
+            const pickLobby = (src) => {
+                if (!src) return "";
+                if (src.lobbyBySide && src.lobbyBySide[currentSide]) return src.lobbyBySide[currentSide];
+                if (typeof src.lobby === "string") return src.lobby;
+                if (src.lobby && typeof src.lobby === "object" && src.lobby[currentSide]) return src.lobby[currentSide];
+                return "";
+            };
+            const partyLobby = pickLobby(party) || pickLobby(info.card3);
+
             /* ---- ViewModel ---- */
             const vm = {
                 groom: info.groom,
@@ -320,6 +332,7 @@
                     ...info.card3,
                     eyebrowTop: sideDetails.card3EyebrowTop || ev.card3EyebrowTop || info.card3.eyebrowTop || "",
                     venueName: party.venueName || info.card3.venueName || "",
+                    lobby: partyLobby,
                     weekday: d.weekday,
                     day: d.day,
                     month: d.month,
@@ -354,7 +367,11 @@
 
             document.querySelectorAll("[data-bind]").forEach((el) => {
                 const v = byPath(vm, el.dataset.bind);
-                if (v !== undefined && v !== null) el.textContent = String(v);
+                if (v !== undefined && v !== null && v !== "") {
+                    el.textContent = String(v);
+                } else if (el.dataset.hideEmpty === "true") {
+                    el.style.display = "none";
+                }
             });
 
             document.querySelectorAll("[data-bind-html]").forEach((el) => {

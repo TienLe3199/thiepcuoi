@@ -116,6 +116,14 @@ window.info = {
             party: {
                 time: "18:00",
                 venueName: "Nhà Hàng Cát Đằng",
+                /* Sảnh tiệc — tách riêng theo phía chú rể / cô dâu.
+                   Nếu cả 2 phía cùng sảnh, có thể thay bằng:
+                       lobby: "Sapphire - Tầng 2"
+                */
+                lobbyBySide: {
+                    groom: "Sapphire - Tầng 2",
+                    bride: ""
+                },
                 addressLines: [
                     "11, đường Trương Văn Thành, KP4, phường Tăng Nhơn Phú",
                     "TP. Hồ Chí Minh"
